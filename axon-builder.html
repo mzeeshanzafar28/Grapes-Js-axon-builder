@@ -1,0 +1,1092 @@
+<!doctype html>
+<html lang="en">
+  
+  <head>
+  <meta charset="utf-8">
+  <title>GrapesJS Demo - Free Open Source Website Page Builder</title>
+  <meta content="Best Free Open Source Responsive Websites Builder" name="description">
+  <link rel="stylesheet" href="stylesheets/toastr.min.css">
+  <link rel="stylesheet" href="stylesheets/grapes.min.css?v0.21.6">
+  <link rel="stylesheet" href="stylesheets/grapesjs-preset-webpage.min.css">
+  <link rel="stylesheet" href="stylesheets/tooltip.css">
+  <link rel="stylesheet" href="stylesheets/demos.css?v3">
+  <link href="https://unpkg.com/grapick/dist/grapick.min.css" rel="stylesheet">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="js/toastr.min.js"></script>
+  <script src="js/grapes.min.js?v0.21.6"></script>
+  <script src="https://unpkg.com/grapesjs-preset-webpage@1.0.2"></script>
+  <script src="https://unpkg.com/grapesjs-blocks-basic@1.0.1"></script>
+  <script src="https://unpkg.com/grapesjs-plugin-forms@2.0.5"></script>
+  <script src="https://unpkg.com/grapesjs-component-countdown@1.0.1"></script>
+  <script src="https://unpkg.com/grapesjs-plugin-export@1.0.11"></script>
+  <script src="https://unpkg.com/grapesjs-tabs@1.0.6"></script>
+  <script src="https://unpkg.com/grapesjs-custom-code@1.0.1"></script>
+  <script src="https://unpkg.com/grapesjs-touch@0.1.1"></script>
+  <script src="https://unpkg.com/grapesjs-parser-postcss@1.0.1"></script>
+  <script src="https://unpkg.com/grapesjs-tooltip@0.1.7"></script>
+  <script src="https://unpkg.com/grapesjs-tui-image-editor@0.1.3"></script>
+  <script src="https://unpkg.com/grapesjs-typed@1.0.5"></script>
+  <script src="https://unpkg.com/grapesjs-style-bg@2.0.1"></script>
+
+  <style type="text/css">
+    .icons-flex {
+      background-size: 70% 65% !important;
+      height: 15px;
+      width: 17px;
+      opacity: 0.9;
+    }
+
+    .icon-dir-row {
+      background: url("./img/flex-dir-row.png") no-repeat center;
+    }
+
+    .icon-dir-row-rev {
+      background: url("./img/flex-dir-row-rev.png") no-repeat center;
+    }
+
+    .icon-dir-col {
+      background: url("./img/flex-dir-col.png") no-repeat center;
+    }
+
+    .icon-dir-col-rev {
+      background: url("./img/flex-dir-col-rev.png") no-repeat center;
+    }
+
+    .icon-just-start {
+      background: url("./img/flex-just-start.png") no-repeat center;
+    }
+
+    .icon-just-end {
+      background: url("./img/flex-just-end.png") no-repeat center;
+    }
+
+    .icon-just-sp-bet {
+      background: url("./img/flex-just-sp-bet.png") no-repeat center;
+    }
+
+    .icon-just-sp-ar {
+      background: url("./img/flex-just-sp-ar.png") no-repeat center;
+    }
+
+    .icon-just-sp-cent {
+      background: url("./img/flex-just-sp-cent.png") no-repeat center;
+    }
+
+    .icon-al-start {
+      background: url("./img/flex-al-start.png") no-repeat center;
+    }
+
+    .icon-al-end {
+      background: url("./img/flex-al-end.png") no-repeat center;
+    }
+
+    .icon-al-str {
+      background: url("./img/flex-al-str.png") no-repeat center;
+    }
+
+    .icon-al-center {
+      background: url("./img/flex-al-center.png") no-repeat center;
+    }
+
+    [data-tooltip]::after {
+      background: rgba(51, 51, 51, 0.9);
+    }
+
+    .gjs-pn-commands {
+      min-height: 40px;
+    }
+
+    #gjs-sm-float {
+      display: none;
+    }
+
+    .gjs-logo-version {
+      background-color: #756467;
+      display: none;
+    }
+
+    .gjs-pn-btn.gjs-pn-active {
+      box-shadow: none;
+    }
+
+    .CodeMirror {
+      min-height: 450px;
+      margin-bottom: 8px;
+    }
+
+    .grp-handler-close {
+      background-color: transparent;
+      color: #ddd;
+    }
+
+    .grp-handler-cp-wrap {
+      border-color: transparent;
+    }
+  </style>
+</head>
+
+<body>
+  <div style="display: none">
+    <div class="gjs-logo-cont">
+      <a href="https://axontech.pk"><img class="gjs-logo" src="img/axon.jpg"></a>
+      <div class="gjs-logo-version"></div>
+    </div>
+  </div>
+  <div class="ad-cont">
+    <!-- <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=grapesjscom" id="_carbonads_js"></script> -->
+    <div id="native-carbon"></div>
+    <script async type="text/javascript" src="./js/carbon-v2.js"></script>
+  </div>
+
+  <!--<div class="pages-wrp" style="display: none;">
+    <div class="add-page"
+      onclick="let len = pm.getAll().length; pm.add({ name: 'Page '+ (len+1), component: '<div>New page</div>', });">Add
+      new page</div>
+    <div class="pages">
+    </div>
+  </div>-->
+  <style>
+    body,
+    html {
+      height: 100%;
+      margin: 0;
+    }
+
+    .app-wrap {
+      height: 100%;
+      width: 100%;
+      display: flex;
+    }
+
+    .editor-wrap {
+      widtH: 100%;
+      height: 100%;
+    }
+
+    .pages-wrp,
+    .pages {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pages-wrp {
+      background: #333;
+      padding: 5px;
+    }
+
+    .add-page {
+      background: #444;
+      color: white;
+      padding: 5px;
+      border-radius: 2px;
+      cursor: pointer;
+      white-space: nowrap;
+      margin-bottom: 10px;
+    }
+
+    .page {
+      background-color: #b9a5a6;
+      color: white;
+      padding: 5px;
+      margin-bottom: 10px;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    .page.selected {
+      background-color: #d97aa6;
+    }
+
+    .page-close {
+      opacity: 0.5;
+      float: right;
+      background-color: #2c2c2c;
+      height: 20px;
+      display: inline-block;
+      width: 17px;
+      text-align: center;
+      border-radius: 3px;
+    }
+
+    .page-close:hover {
+      opacity: 1;
+    }
+  </style>
+
+
+  <div id="gjs" style="height:0px; overflow:hidden"> </div>
+
+  <div id="info-panel" style="display:none">
+    <br />
+    <svg class="info-panel-logo" xmlns="https://www.w3.org/2000/svg" version="1">
+      <g id="gjs-logo">
+        <path
+          d="M40 5l-12.9 7.4 -12.9 7.4c-1.4 0.8-2.7 2.3-3.7 3.9 -0.9 1.6-1.5 3.5-1.5 5.1v14.9 14.9c0 1.7 0.6 3.5 1.5 5.1 0.9 1.6 2.2 3.1 3.7 3.9l12.9 7.4 12.9 7.4c1.4 0.8 3.3 1.2 5.2 1.2 1.9 0 3.8-0.4 5.2-1.2l12.9-7.4 12.9-7.4c1.4-0.8 2.7-2.2 3.7-3.9 0.9-1.6 1.5-3.5 1.5-5.1v-14.9 -12.7c0-4.6-3.8-6-6.8-4.2l-28 16.2"
+          style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-width:10;stroke:#fff" />
+      </g>
+    </svg>
+    <br />
+    <div class="info-panel-label">
+      <b>GrapesJS Webpage Builder</b> is a simple showcase of what is possible to achieve with the
+      <a class="info-panel-link gjs-four-color" target="_blank" href="https://github.com/artf/grapesjs">GrapesJS</a>
+      core library
+      <br /><br />
+      For any hint about the demo check the
+      <a class="info-panel-link gjs-four-color" target="_blank"
+        href="https://github.com/artf/grapesjs-preset-webpage">Webpage Preset repository</a>
+      and open an issue. For problems with the builder itself, open an issue on the main
+      <a class="info-panel-link gjs-four-color" target="_blank" href="https://github.com/artf/grapesjs">GrapesJS
+        repository</a>
+      <br /><br />
+      Being a free and open source project contributors and supporters are extremely welcome.
+      If you like the project support it with a donation of your choice or become a backer/sponsor via
+      <a class="info-panel-link gjs-four-color" target="_blank" href="https://opencollective.com/grapesjs">Open
+        Collective</a>
+    </div>
+  </div>
+
+
+  <script type="text/javascript">
+    var lp = './img/';
+    var plp = 'https://via.placeholder.com/350x250/';
+    var images = [
+      lp + 'team1.jpg',
+      lp + 'team2.jpg',
+      lp + 'team3.jpg',
+      plp + '78c5d6/fff',
+      plp + '459ba8/fff',
+      plp + '79c267/fff',
+      plp + 'c5d647/fff',
+      plp + 'f28c33/fff',
+      plp + 'e868a2/fff',
+      plp + 'cc4360/fff',
+      lp + 'work-desk.jpg',
+      lp + 'phone-app.png',
+      lp + 'bg-gr-v.png'
+    ];
+
+    var editor = grapesjs.init({
+      height: '100%',
+      container: '#gjs',
+      fromElement: true,
+      showOffsets: true,
+      assetManager: {
+        embedAsBase64: true,
+        assets: images
+      },
+      deviceManager: {
+        default: 'mobilePortrait',
+        devices: [
+          {
+            id: 'tablet',
+            name: 'Tablet',
+            width: '580px',
+            widthMedia: '768px',
+          },
+          {
+            id: 'mobilePortrait',
+            name: 'Mobile portrait',
+            width: '320px',
+            widthMedia: '480px',
+          },
+        ],
+      },
+      selectorManager: { componentFirst: true },
+      styleManager: {
+        sectors: [{
+          name: 'General',
+          properties: [
+            {
+              extend: 'float',
+              type: 'radio',
+              default: 'none',
+              options: [
+                { value: 'none', className: 'fa fa-times' },
+                { value: 'left', className: 'fa fa-align-left' },
+                { value: 'right', className: 'fa fa-align-right' }
+              ],
+            },
+            'display',
+            { extend: 'position', type: 'select' },
+            'top',
+            'right',
+            'left',
+            'bottom',
+          ],
+        }, {
+          name: 'Dimension',
+          open: false,
+          properties: [
+            'width',
+            {
+              id: 'flex-width',
+              type: 'integer',
+              name: 'Width',
+              units: ['px', '%'],
+              property: 'flex-basis',
+              toRequire: 1,
+            },
+            'height',
+            'max-width',
+            'min-height',
+            'margin',
+            'padding'
+          ],
+        }, {
+          name: 'Typography',
+          open: false,
+          properties: [
+            'font-family',
+            'font-size',
+            'font-weight',
+            'letter-spacing',
+            'color',
+            'line-height',
+            {
+              extend: 'text-align',
+              options: [
+                { id: 'left', label: 'Left', className: 'fa fa-align-left' },
+                { id: 'center', label: 'Center', className: 'fa fa-align-center' },
+                { id: 'right', label: 'Right', className: 'fa fa-align-right' },
+                { id: 'justify', label: 'Justify', className: 'fa fa-align-justify' }
+              ],
+            },
+            {
+              property: 'text-decoration',
+              type: 'radio',
+              default: 'none',
+              options: [
+                { id: 'none', label: 'None', className: 'fa fa-times' },
+                { id: 'underline', label: 'underline', className: 'fa fa-underline' },
+                { id: 'line-through', label: 'Line-through', className: 'fa fa-strikethrough' }
+              ],
+            },
+            'text-shadow'
+          ],
+        }, {
+          name: 'Decorations',
+          open: false,
+          properties: [
+            'opacity',
+            'border-radius',
+            'border',
+            'box-shadow',
+            'background', // { id: 'background-bg', property: 'background', type: 'bg' }
+          ],
+        }, {
+          name: 'Extra',
+          open: false,
+          buildProps: [
+            'transition',
+            'perspective',
+            'transform'
+          ],
+        }, {
+          name: 'Flex',
+          open: false,
+          properties: [{
+            name: 'Flex Container',
+            property: 'display',
+            type: 'select',
+            defaults: 'block',
+            list: [
+              { value: 'block', name: 'Disable' },
+              { value: 'flex', name: 'Enable' }
+            ],
+          }, {
+            name: 'Flex Parent',
+            property: 'label-parent-flex',
+            type: 'integer',
+          }, {
+            name: 'Direction',
+            property: 'flex-direction',
+            type: 'radio',
+            defaults: 'row',
+            list: [{
+              value: 'row',
+              name: 'Row',
+              className: 'icons-flex icon-dir-row',
+              title: 'Row',
+            }, {
+              value: 'row-reverse',
+              name: 'Row reverse',
+              className: 'icons-flex icon-dir-row-rev',
+              title: 'Row reverse',
+            }, {
+              value: 'column',
+              name: 'Column',
+              title: 'Column',
+              className: 'icons-flex icon-dir-col',
+            }, {
+              value: 'column-reverse',
+              name: 'Column reverse',
+              title: 'Column reverse',
+              className: 'icons-flex icon-dir-col-rev',
+            }],
+          }, {
+            name: 'Justify',
+            property: 'justify-content',
+            type: 'radio',
+            defaults: 'flex-start',
+            list: [{
+              value: 'flex-start',
+              className: 'icons-flex icon-just-start',
+              title: 'Start',
+            }, {
+              value: 'flex-end',
+              title: 'End',
+              className: 'icons-flex icon-just-end',
+            }, {
+              value: 'space-between',
+              title: 'Space between',
+              className: 'icons-flex icon-just-sp-bet',
+            }, {
+              value: 'space-around',
+              title: 'Space around',
+              className: 'icons-flex icon-just-sp-ar',
+            }, {
+              value: 'center',
+              title: 'Center',
+              className: 'icons-flex icon-just-sp-cent',
+            }],
+          }, {
+            name: 'Align',
+            property: 'align-items',
+            type: 'radio',
+            defaults: 'center',
+            list: [{
+              value: 'flex-start',
+              title: 'Start',
+              className: 'icons-flex icon-al-start',
+            }, {
+              value: 'flex-end',
+              title: 'End',
+              className: 'icons-flex icon-al-end',
+            }, {
+              value: 'stretch',
+              title: 'Stretch',
+              className: 'icons-flex icon-al-str',
+            }, {
+              value: 'center',
+              title: 'Center',
+              className: 'icons-flex icon-al-center',
+            }],
+          }, {
+            name: 'Flex Children',
+            property: 'label-parent-flex',
+            type: 'integer',
+          }, {
+            name: 'Order',
+            property: 'order',
+            type: 'integer',
+            defaults: 0,
+            min: 0
+          }, {
+            name: 'Flex',
+            property: 'flex',
+            type: 'composite',
+            properties: [{
+              name: 'Grow',
+              property: 'flex-grow',
+              type: 'integer',
+              defaults: 0,
+              min: 0
+            }, {
+              name: 'Shrink',
+              property: 'flex-shrink',
+              type: 'integer',
+              defaults: 0,
+              min: 0
+            }, {
+              name: 'Basis',
+              property: 'flex-basis',
+              type: 'integer',
+              units: ['px', '%', ''],
+              unit: '',
+              defaults: 'auto',
+            }],
+          }, {
+            name: 'Align',
+            property: 'align-self',
+            type: 'radio',
+            defaults: 'auto',
+            list: [{
+              value: 'auto',
+              name: 'Auto',
+            }, {
+              value: 'flex-start',
+              title: 'Start',
+              className: 'icons-flex icon-al-start',
+            }, {
+              value: 'flex-end',
+              title: 'End',
+              className: 'icons-flex icon-al-end',
+            }, {
+              value: 'stretch',
+              title: 'Stretch',
+              className: 'icons-flex icon-al-str',
+            }, {
+              value: 'center',
+              title: 'Center',
+              className: 'icons-flex icon-al-center',
+            }],
+          }]
+        }
+        ],
+      },
+      plugins: [
+        'gjs-blocks-basic',
+        'grapesjs-plugin-forms',
+        'grapesjs-component-countdown',
+        'grapesjs-plugin-export',
+        'grapesjs-tabs',
+        'grapesjs-custom-code',
+        'grapesjs-touch',
+        'grapesjs-parser-postcss',
+        'grapesjs-tooltip',
+        'grapesjs-tui-image-editor',
+        'grapesjs-typed',
+        'grapesjs-style-bg',
+        'grapesjs-preset-webpage',
+      ],
+      pageManager: {
+      pages: [
+        {
+          id: 'my-first-page',
+          name: 'Page 1',
+          styles: `
+            .my-el { 
+              color: red;
+            }
+
+            @media (max-width: 480px) {
+              /* Mobile Portrait styles */
+              .my-el {
+                font-size: 14px;
+              }
+            }
+
+            @media (min-width: 481px) and (max-width: 768px) {
+              /* Tablet styles */
+              .my-el {
+                font-size: 16px;
+              }
+            }
+          `,
+          component: `
+            <div style="width: 100%; margin: 0 auto; box-sizing: border-box;">
+
+              <div style="width:100vw; text-align: center; padding: 20px; background-color: #3498db; color: #fff;">
+                <h1>Welcome to Apperman!</h1>
+                <p>Your platform for easy APK creation.</p>
+              </div>
+
+              <div style="padding: 20px; box-sizing: border-box;">
+
+                <div style="padding: 20px; background-color: #2ecc71; color: #fff; border-radius: 10px; text-align: center; margin-bottom: 20px;">
+                  <h2>Create APK from URL</h2>
+                  <p>Paste the URL of your site and transform it into an APK.</p>
+                </div>
+
+                <div style="padding: 20px; background-color: #e74c3c; color: #fff; border-radius: 10px; text-align: center; margin-bottom: 20px;">
+                  <h2>Create APK with Drag and Drop</h2>
+                  <p>Simply drag and drop to build your custom APK.</p>
+                </div>
+
+                <div style="padding: 20px; background-color: #f39c12; color: #fff; border-radius: 10px; text-align: center;">
+                  <h2>Easy and Fast</h2>
+                  <p>Apperman makes the APK creation process quick and effortless.</p>
+                </div>
+
+              </div>
+
+              <style>
+                /* Add any additional styles here */
+
+                h1 {
+                  margin-bottom: 10px;
+                }
+
+                p {
+                  font-size: 18px;
+                }
+
+                h2 {
+                  margin-bottom: 8px;
+                }
+
+                .my-el {
+                  /* Common styles for all devices */
+                  font-size: 18px;
+                }
+              </style>
+            </div>
+          `,
+        },
+      ],
+    },
+
+      pluginsOpts: {
+        
+      //   'grapesjs-plugin-export': {
+      //     root(ed) {
+      //         const allPages = ed.Pages.getAll();
+      //         const exportedContent = {};
+
+      //         allPages.forEach(page => {
+      //             const pageName = page.get('name') || page.id;
+      //             const cssId = 'style-' + page.id + '.css';
+
+      //             exportedContent[`${pageName}.html`] = `
+      //                 <!doctype html>
+      //                 <html lang="en">
+      //                     <head>
+      //                         <meta charset="utf-8">
+      //                         <link rel="stylesheet" href="/css/${cssId}">
+      //                     </head>
+      //                     <body>
+      //                         ${page.getMainComponent().toHTML()}
+      //                     </body>
+      //                 </html>
+      //             `;
+
+      //             exportedContent[cssId] = editor.CodeManager.getCode(page.getMainComponent(), 'css');
+      //         });
+
+      //         return exportedContent;
+      //     }
+      // },
+
+        'gjs-blocks-basic': { flexGrid: true },
+        'grapesjs-tui-image-editor': {
+          script: [
+            // 'https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.6.7/fabric.min.js',
+            'https://uicdn.toast.com/tui.code-snippet/v1.5.2/tui-code-snippet.min.js',
+            'https://uicdn.toast.com/tui-color-picker/v2.2.7/tui-color-picker.min.js',
+            'https://uicdn.toast.com/tui-image-editor/v3.15.2/tui-image-editor.min.js'
+          ],
+          style: [
+            'https://uicdn.toast.com/tui-color-picker/v2.2.7/tui-color-picker.min.css',
+            'https://uicdn.toast.com/tui-image-editor/v3.15.2/tui-image-editor.min.css',
+          ],
+        },
+        'grapesjs-tabs': {
+          tabsBlock: { category: 'Extra' }
+        },
+        'grapesjs-typed': {
+          block: {
+            category: 'Extra',
+            content: {
+              type: 'typed',
+              'type-speed': 40,
+              strings: [
+                'Text row one',
+                'Text row two',
+                'Text row three',
+              ],
+            }
+          }
+        },
+        'grapesjs-preset-webpage': {
+          modalImportTitle: 'Import Template',
+          modalImportLabel: '<div style="margin-bottom: 10px; font-size: 13px;">Paste here your HTML/CSS and click Import</div>',
+          modalImportContent: function (editor) {
+            return editor.getHtml() + '<style>' + editor.getCss() + '</style>'
+          },
+        },
+      },
+    });
+
+    const pm = editor.Pages;
+    //   const app = new Vue({
+    //   el: '.pages-wrp',
+    //   data: { pages: [] },
+    //   mounted() {
+    //     this.setPages(pm.getAll());
+    //     editor.on('page', () => {
+    //       this.pages = [...pm.getAll()];
+    //     });
+    //   },
+    //   methods: {
+    //     setPages(pages) {
+    //       this.pages = [...pages];
+    //     },
+    //     isSelected(page) {
+    //       return pm.getSelected().id == page.id;
+    //     },
+    //     selectPage(pageId) {
+    //       return pm.select(pageId);
+    //     },
+    //     removePage(pageId) {
+    //       return pm.remove(pageId);
+    //     },
+    //     addPage() {
+    //       const len = pm.getAll().length;
+    //       pm.add({
+    //         name: `Page ${len + 1}`,
+    //         component: '<div>New page</div>',
+    //       });
+    //     },
+    //   }
+    // });
+
+    //       var thepages = pm.getAll();
+    //       thepages.forEach(function(page) {
+    //         let selected = pm.getSelected().id == page.id ? ' selected' : '';
+    //         jQuery('.pages-wrp .pages').append(`<div class="${page.id} ${selected}" onclick="pm.select('${page.id}')">${page.get('name') && page.get('name').length > 0 ? page.get('name') : page.id}<span onclick="pm.remove('${page.id}')" class="page-close">&Cross;</span></div>`);
+    // });
+
+
+
+    editor.I18n.addMessages({
+      en: {
+        styleManager: {
+          properties: {
+            'background-repeat': 'Repeat',
+            'background-position': 'Position',
+            'background-attachment': 'Attachment',
+            'background-size': 'Size',
+          }
+        },
+      }
+    });
+
+    var pn = editor.Panels;
+    var modal = editor.Modal;
+    var cmdm = editor.Commands;
+
+    // Update canvas-clear command
+    cmdm.add('canvas-clear', function () {
+      if (confirm('Are you sure to clean the canvas?')) {
+        editor.runCommand('core:canvas-clear')
+        setTimeout(function () { localStorage.clear() }, 0)
+      }
+    });
+
+    // Add info command
+    var mdlClass = 'gjs-mdl-dialog-sm';
+    var infoContainer = document.getElementById('info-panel');
+
+    cmdm.add('open-info', function () {
+      var mdlDialog = document.querySelector('.gjs-mdl-dialog');
+      mdlDialog.className += ' ' + mdlClass;
+      infoContainer.style.display = 'block';
+      modal.setTitle('About this demo');
+      modal.setContent(infoContainer);
+      modal.open();
+      modal.getModel().once('change:open', function () {
+        mdlDialog.className = mdlDialog.className.replace(mdlClass, '');
+      })
+    });
+
+    pn.addButton('options', {
+      id: 'open-info',
+      className: 'fa fa-question-circle',
+      command: function () { editor.runCommand('open-info') },
+      attributes: {
+        'title': 'About',
+        'data-tooltip-pos': 'bottom',
+      },
+    });
+
+    // Remove the default export plugin
+editor.Panels.removeButton('options', 'export-template');
+
+// Add a custom export button
+editor.Panels.addButton('options', {
+    id: 'custom-export',
+    className: 'fa fa-adn',
+    command: function () {
+        exportAllPages();
+    },
+    attributes: {
+        title: 'Create App',
+        'data-tooltip-pos': 'bottom',
+    },
+});
+
+// Custom export function
+function exportAllPages() {
+    const allPages = editor.Pages.getAll();
+    const exportedContent = {};
+
+    allPages.forEach(page => {
+        const pageName = page.get('name') || page.id;
+        const cssId = 'style-' + page.id + '.css';
+
+        exportedContent[`${pageName}.html`] = `
+            <!doctype html>
+            <html lang="en">
+                <head>
+                    <meta charset="utf-8">
+                    <link rel="stylesheet" href="/css/${cssId}">
+                </head>
+                <body>
+                    ${page.getMainComponent().toHTML()}
+                </body>
+            </html>
+        `;
+
+        exportedContent[cssId] = editor.CodeManager.getCode(page.getMainComponent(), 'css');
+    });
+
+    console.log(exportedContent);
+}
+
+
+    // jQuery(document).ready(function($){
+    //     jQuery(".gjs-pn-devices-c .gjs-pn-buttons .gjs-pn-btn").last().click();
+    //     jQuery(".gjs-pn-devices-c").hide();
+    //     jQuery('div:contains("GrapesJS")').text("Apperman");
+    //     // jQuery(".page").first().attr('data-page-id', 'Page 1');
+
+    // });
+
+    const axpm = {
+      pages: [],
+
+      init() {
+        this.setPages(pm.getAll());
+        editor.on('page', () => {
+          this.pages = [...pm.getAll()];
+          this.renderPages();
+        });
+
+        const pagesWrp = document.querySelector('.pages-wrp');
+        pagesWrp.addEventListener('click', (event) => {
+          const target = event.target;
+          if (target.classList.contains('page')) {
+            const pageId = target.getAttribute('data-page-id');
+            this.selectPage(pageId);
+          } else if (target.classList.contains('page-close')) {
+            const pageId = target.parentElement.getAttribute('data-page-id');
+            this.removePage(pageId);
+          }
+        });
+      },
+
+      setPages(pages) {
+        this.pages = [...pages];
+        this.renderPages();
+      },
+
+      addPage() {
+        const len = pm.getAll().length;
+        pm.add({
+          name: `Page ${len + 1}`,
+          component: '<div><center><h1>New page</h1></center></div>',
+        });
+        this.renderPages();
+      },
+
+      isSelected(page) {
+        return pm.getSelected().id === page.id;
+      },
+
+      selectPage(pageId) {
+        pm.select(pageId);
+        this.renderPages();
+      },
+
+      removePage(pageId) {
+        pm.remove(pageId);
+        this.renderPages();
+      },
+
+      renderPages() {
+        const pagesWrp = document.querySelector('.pages-wrp');
+        pagesWrp.innerHTML = '';
+
+        if (pm.getAll().length === 0) {
+          this.addPage();
+        }
+
+        // Add "Add new page" element
+        const addPageDiv = document.createElement('div');
+        addPageDiv.classList.add('add-page');
+        addPageDiv.innerHTML = 'Add new page';
+        addPageDiv.onclick = (event) => {
+          event.stopPropagation(); // Stop event propagation
+          this.addPage();
+        };
+
+        pagesWrp.appendChild(addPageDiv);
+
+        // Loop through existing pages and render them below "Add new page"
+        this.pages.forEach((page) => {
+          const pageDiv = document.createElement('div');
+          pageDiv.classList.add('page');
+          pageDiv.classList.toggle('selected', this.isSelected(page));
+          pageDiv.setAttribute('data-page-id', page.id);
+
+          const pageName = page.get('name') && page.get('name').length > 0 ? page.get('name') : page.id;
+          pageDiv.innerHTML = `${pageName} <span class="page-close">&Cross;</span>`;
+
+          pagesWrp.appendChild(pageDiv);
+        });
+      },
+    };
+
+    // axpm.init();
+    // pn.addButton('views', {
+    //   id: 'toggle-pages',
+    //   className: 'fa fa-file',
+    //   command: 'toggle-pages',
+    //   attributes: {
+    //     'title': 'Pages',
+    //     'data-tooltip-pos': 'bottom',
+    //   },
+    // });
+
+
+
+    // Simple warn notifier
+    var origWarn = console.warn;
+    toastr.options = {
+      closeButton: true,
+      preventDuplicates: true,
+      showDuration: 250,
+      hideDuration: 150
+    };
+    console.warn = function (msg) {
+      if (msg.indexOf('[undefined]') == -1) {
+        toastr.warning(msg);
+      }
+      origWarn(msg);
+    };
+
+
+    // Add and beautify tooltips
+    [['sw-visibility', 'Show Borders'], ['preview', 'Preview'], ['fullscreen', 'Fullscreen'],
+    ['export-template', 'Export'], ['undo', 'Undo'], ['redo', 'Redo'],
+    ['gjs-open-import-webpage', 'Import'], ['canvas-clear', 'Clear canvas']]
+      .forEach(function (item) {
+        pn.getButton('options', item[0]).set('attributes', { title: item[1], 'data-tooltip-pos': 'bottom' });
+      });
+    [['open-sm', 'Style Manager'], ['open-layers', 'Layers'], ['open-blocks', 'Blocks']]
+      .forEach(function (item) {
+        pn.getButton('views', item[0]).set('attributes', { title: item[1], 'data-tooltip-pos': 'bottom' });
+      });
+    var titles = document.querySelectorAll('*[title]');
+
+    for (var i = 0; i < titles.length; i++) {
+      var el = titles[i];
+      var title = el.getAttribute('title');
+      title = title ? title.trim() : '';
+      if (!title)
+        break;
+      el.setAttribute('data-tooltip', title);
+      el.setAttribute('title', '');
+    }
+
+
+    // Store and load events
+    editor.on('storage:load', function (e) { console.log('Loaded ', e) });
+    editor.on('storage:store', function (e) { console.log('Stored ', e) });
+
+
+    // Do stuff on load
+    editor.on('load', function () {
+      var $ = grapesjs.$;
+
+      // Show borders by default
+      pn.getButton('options', 'sw-visibility').set('active', 1);
+
+      // Show logo with the version
+      var logoCont = document.querySelector('.gjs-logo-cont');
+      document.querySelector('.gjs-logo-version').innerHTML = 'v' + grapesjs.version;
+      var logoPanel = document.querySelector('.gjs-pn-commands');
+      logoPanel.appendChild(logoCont);
+
+
+      // Load and show settings and style manager
+      var openTmBtn = pn.getButton('views', 'open-tm');
+      openTmBtn && openTmBtn.set('active', 1);
+      var openSm = pn.getButton('views', 'open-sm');
+      openSm && openSm.set('active', 1);
+
+      // Remove trait view
+      pn.removeButton('views', 'open-tm');
+
+      // Add Settings Sector
+      var traitsSector = $('<div class="gjs-sm-sector no-select">' +
+        '<div class="gjs-sm-sector-title"><span class="icon-settings fa fa-cog"></span> <span class="gjs-sm-sector-label">Settings</span></div>' +
+        '<div class="gjs-sm-properties" style="display: none;"></div></div>');
+      var traitsProps = traitsSector.find('.gjs-sm-properties');
+      traitsProps.append($('.gjs-trt-traits'));
+      $('.gjs-sm-sectors').before(traitsSector);
+      traitsSector.find('.gjs-sm-sector-title').on('click', function () {
+        var traitStyle = traitsProps.get(0).style;
+        var hidden = traitStyle.display == 'none';
+        if (hidden) {
+          traitStyle.display = 'block';
+        } else {
+          traitStyle.display = 'none';
+        }
+      });
+
+      // Open block manager
+      var openBlocksBtn = editor.Panels.getButton('views', 'open-blocks');
+      openBlocksBtn && openBlocksBtn.set('active', 1);
+
+      // Move Ad
+      $('#gjs').append($('.ad-cont'));
+
+      // Add a button for toggling pages visibility
+      let pagesPanel = null
+      pn.addButton('views', {
+          id: 'toggle-pages',
+          attributes: {class: 'fa fa-file', title: "Pages"},
+          active: false,
+          command: 'toggle-pages'
+      });
+
+      editor.Commands.add('toggle-pages', {
+        run: function (editor) {
+          if(pagesPanel == null){
+              const pagesMenu = document.createElement('div')
+              pagesMenu.innerHTML = `
+              <div class="pages-wrp">
+                <div class="add-page"
+                  onclick="let len = pm.getAll().length; pm.add({ name: 'Page '+ (len+1), component: '<div>New page</div>', });">Add
+                  new page</div>
+                <div class="pages">
+                </div>
+              </div>
+              `
+              const panels = editor.Panels.getPanel('views-container')
+              console.log(editor.Panels.getPanels());
+              panels.set('appendContent', pagesMenu).trigger('change:appendContent')
+              pagesPanel = pagesMenu
+          }
+          pagesPanel.style.display = 'block'
+        },
+        stop: function (editor) {
+            if(pagesPanel != null){
+              pagesPanel.style.display = 'none'
+            }
+        }
+      });
+      editor.Commands.run('toggle-pages');
+
+      axpm.init();
+
+      pn.removeButton("devices-c","set-device-desktop");   
+      jQuery(".gjs-pn-devices-c .gjs-pn-buttons span").last().click(); 
+      
+        });
+
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-74284223-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+
+</html>
