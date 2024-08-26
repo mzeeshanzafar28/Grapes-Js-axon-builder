@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
-  
-  <head>
+
+<head>
   <meta charset="utf-8">
   <title>GrapesJS Demo - Free Open Source Website Page Builder</title>
   <meta content="Best Free Open Source Responsive Websites Builder" name="description">
@@ -372,7 +372,7 @@
             'border-radius',
             'border',
             'box-shadow',
-            'background', // { id: 'background-bg', property: 'background', type: 'bg' }
+            'background',
           ],
         }, {
           name: 'Extra',
@@ -551,11 +551,11 @@
         'grapesjs-preset-webpage',
       ],
       pageManager: {
-      pages: [
-        {
-          id: 'my-first-page',
-          name: 'Page 1',
-          styles: `
+        pages: [
+          {
+            id: 'my-first-page',
+            name: 'Page 1',
+            styles: `
             .my-el { 
               color: red;
             }
@@ -574,7 +574,7 @@
               }
             }
           `,
-          component: `
+            component: `
             <div style="width: 100%; margin: 0 auto; box-sizing: border-box;">
 
               <div style="width:100vw; text-align: center; padding: 20px; background-color: #3498db; color: #fff;">
@@ -623,40 +623,40 @@
               </style>
             </div>
           `,
-        },
-      ],
-    },
+          },
+        ],
+      },
 
       pluginsOpts: {
-        
-      //   'grapesjs-plugin-export': {
-      //     root(ed) {
-      //         const allPages = ed.Pages.getAll();
-      //         const exportedContent = {};
 
-      //         allPages.forEach(page => {
-      //             const pageName = page.get('name') || page.id;
-      //             const cssId = 'style-' + page.id + '.css';
+        //   'grapesjs-plugin-export': {
+        //     root(ed) {
+        //         const allPages = ed.Pages.getAll();
+        //         const exportedContent = {};
 
-      //             exportedContent[`${pageName}.html`] = `
-      //                 <!doctype html>
-      //                 <html lang="en">
-      //                     <head>
-      //                         <meta charset="utf-8">
-      //                         <link rel="stylesheet" href="/css/${cssId}">
-      //                     </head>
-      //                     <body>
-      //                         ${page.getMainComponent().toHTML()}
-      //                     </body>
-      //                 </html>
-      //             `;
+        //         allPages.forEach(page => {
+        //             const pageName = page.get('name') || page.id;
+        //             const cssId = 'style-' + page.id + '.css';
 
-      //             exportedContent[cssId] = editor.CodeManager.getCode(page.getMainComponent(), 'css');
-      //         });
+        //             exportedContent[`${pageName}.html`] = `
+        //                 <!doctype html>
+        //                 <html lang="en">
+        //                     <head>
+        //                         <meta charset="utf-8">
+        //                         <link rel="stylesheet" href="/css/${cssId}">
+        //                     </head>
+        //                     <body>
+        //                         ${page.getMainComponent().toHTML()}
+        //                     </body>
+        //                 </html>
+        //             `;
 
-      //         return exportedContent;
-      //     }
-      // },
+        //             exportedContent[cssId] = editor.CodeManager.getCode(page.getMainComponent(), 'css');
+        //         });
+
+        //         return exportedContent;
+        //     }
+        // },
 
         'gjs-blocks-basic': { flexGrid: true },
         'grapesjs-tui-image-editor': {
@@ -699,43 +699,6 @@
     });
 
     const pm = editor.Pages;
-    //   const app = new Vue({
-    //   el: '.pages-wrp',
-    //   data: { pages: [] },
-    //   mounted() {
-    //     this.setPages(pm.getAll());
-    //     editor.on('page', () => {
-    //       this.pages = [...pm.getAll()];
-    //     });
-    //   },
-    //   methods: {
-    //     setPages(pages) {
-    //       this.pages = [...pages];
-    //     },
-    //     isSelected(page) {
-    //       return pm.getSelected().id == page.id;
-    //     },
-    //     selectPage(pageId) {
-    //       return pm.select(pageId);
-    //     },
-    //     removePage(pageId) {
-    //       return pm.remove(pageId);
-    //     },
-    //     addPage() {
-    //       const len = pm.getAll().length;
-    //       pm.add({
-    //         name: `Page ${len + 1}`,
-    //         component: '<div>New page</div>',
-    //       });
-    //     },
-    //   }
-    // });
-
-    //       var thepages = pm.getAll();
-    //       thepages.forEach(function(page) {
-    //         let selected = pm.getSelected().id == page.id ? ' selected' : '';
-    //         jQuery('.pages-wrp .pages').append(`<div class="${page.id} ${selected}" onclick="pm.select('${page.id}')">${page.get('name') && page.get('name').length > 0 ? page.get('name') : page.id}<span onclick="pm.remove('${page.id}')" class="page-close">&Cross;</span></div>`);
-    // });
 
 
 
@@ -755,6 +718,9 @@
     var pn = editor.Panels;
     var modal = editor.Modal;
     var cmdm = editor.Commands;
+
+    var bm = editor.BlockManager;
+
 
     // Update canvas-clear command
     cmdm.add('canvas-clear', function () {
@@ -791,27 +757,27 @@
     });
 
     // Remove the default export plugin
-editor.Panels.removeButton('options', 'export-template');
+    editor.Panels.removeButton('options', 'export-template');
 
-// Add a custom export button
-editor.Panels.addButton('options', {
-    id: 'custom-export',
-    className: 'fa fa-adn',
-    command: function () {
+    // Add a custom export button
+    editor.Panels.addButton('options', {
+      id: 'custom-export',
+      className: 'fa fa-adn',
+      command: function () {
         exportAllPages();
-    },
-    attributes: {
+      },
+      attributes: {
         title: 'Create App',
         'data-tooltip-pos': 'bottom',
-    },
-});
+      },
+    });
 
-// Custom export function
-function exportAllPages() {
-    const allPages = editor.Pages.getAll();
-    const exportedContent = {};
+    // Custom export function
+    function exportAllPages() {
+      const allPages = editor.Pages.getAll();
+      const exportedContent = {};
 
-    allPages.forEach(page => {
+      allPages.forEach(page => {
         const pageName = page.get('name') || page.id;
         const cssId = 'style-' + page.id + '.css';
 
@@ -829,19 +795,10 @@ function exportAllPages() {
         `;
 
         exportedContent[cssId] = editor.CodeManager.getCode(page.getMainComponent(), 'css');
-    });
+      });
 
-    console.log(exportedContent);
-}
-
-
-    // jQuery(document).ready(function($){
-    //     jQuery(".gjs-pn-devices-c .gjs-pn-buttons .gjs-pn-btn").last().click();
-    //     jQuery(".gjs-pn-devices-c").hide();
-    //     jQuery('div:contains("GrapesJS")').text("Apperman");
-    //     // jQuery(".page").first().attr('data-page-id', 'Page 1');
-
-    // });
+      console.log(exportedContent);
+    }
 
     const axpm = {
       pages: [],
@@ -928,16 +885,91 @@ function exportAllPages() {
       },
     };
 
-    // axpm.init();
-    // pn.addButton('views', {
-    //   id: 'toggle-pages',
-    //   className: 'fa fa-file',
-    //   command: 'toggle-pages',
-    //   attributes: {
-    //     'title': 'Pages',
-    //     'data-tooltip-pos': 'bottom',
-    //   },
-    // });
+
+    // stay below $$$$$$$$$$$$$$$$$$$
+
+
+    function getPageOptions() {
+      const allPages = editor.Pages.getAll();
+      return allPages.map(page => ({
+        id: page.id,
+        name: page.get('name') || page.id
+      }));
+    }
+
+    bm.add('pages', {
+      label: 'Pages',
+      content: '<a class="pages-block goto-page" href="">Go to Page</a>',
+      category: 'Basic',
+      attributes: { class: 'fa fa-file' },
+    });
+
+    editor.Components.addType('pages', {
+      extend: 'link',
+      isComponent: el => el.tagName === 'A',
+      model: {
+        defaults: {
+          type: 'link',
+          tagName: 'a',
+          editable: true,
+          draggable: true,
+          copyable: true,
+          traits: [
+            {
+              type: 'select',
+              name: 'page',
+              label: 'Page',
+
+              options: getPageOptions().map(opt => ({
+                value: opt.id,
+                name: opt.name,
+              })),
+              changeProp: 1
+            }
+          ],
+        },
+        init() {
+          this.listenTo(this, 'change:page', this.updateHref);
+        },
+        updateHref() {
+          const selectedPageId = this.get('page');
+          const page = getPageOptions().find(p => p.id === selectedPageId);
+          if (page) {
+            const pageHref = page.name.toLowerCase().replace(/\s+/g, '_') + '.html';
+            this.addAttributes({ href: pageHref });
+          }
+        },
+      },
+    });
+
+    editor.on('component:selected', (model) => {
+      if (model.get('type') === 'pages') {
+        const pageOptions = getPageOptions().map(opt => ({
+          value: opt.id,
+          name: opt.name,
+        }));
+
+        const pageTrait = model.getTrait('page');
+        if (pageTrait) {
+          pageTrait.set('options', pageOptions);
+        }
+      }
+    });
+
+    editor.on('component:update', (model) => {
+      if (model.get('type') === 'pages') {
+        const page_id = model.attributes.page;
+        const page = getPageOptions().find(p => p.id === page_id);
+        if (page) {
+          const pageHref = page.name.toLowerCase().replace(/\s+/g, '_') + '.html';
+          model.addAttributes({ href: pageHref });
+        }
+      }
+    });
+
+
+
+    // stay above $$$$$$$$$$$$$$$$
 
 
 
@@ -962,7 +994,13 @@ function exportAllPages() {
     ['export-template', 'Export'], ['undo', 'Undo'], ['redo', 'Redo'],
     ['gjs-open-import-webpage', 'Import'], ['canvas-clear', 'Clear canvas']]
       .forEach(function (item) {
-        pn.getButton('options', item[0]).set('attributes', { title: item[1], 'data-tooltip-pos': 'bottom' });
+        var button = pn.getButton('options', item[0]);
+        if (button) {
+          button.set('attributes', { title: item[1], 'data-tooltip-pos': 'bottom' });
+        } else {
+          console.error('Button not found:', item[0]);
+        }
+
       });
     [['open-sm', 'Style Manager'], ['open-layers', 'Layers'], ['open-blocks', 'Blocks']]
       .forEach(function (item) {
@@ -1036,17 +1074,17 @@ function exportAllPages() {
       // Add a button for toggling pages visibility
       let pagesPanel = null
       pn.addButton('views', {
-          id: 'toggle-pages',
-          attributes: {class: 'fa fa-file', title: "Pages"},
-          active: false,
-          command: 'toggle-pages'
+        id: 'toggle-pages',
+        attributes: { class: 'fa fa-file', title: "Pages" },
+        active: false,
+        command: 'toggle-pages'
       });
 
       editor.Commands.add('toggle-pages', {
         run: function (editor) {
-          if(pagesPanel == null){
-              const pagesMenu = document.createElement('div')
-              pagesMenu.innerHTML = `
+          if (pagesPanel == null) {
+            const pagesMenu = document.createElement('div')
+            pagesMenu.innerHTML = `
               <div class="pages-wrp">
                 <div class="add-page"
                   onclick="let len = pm.getAll().length; pm.add({ name: 'Page '+ (len+1), component: '<div>New page</div>', });">Add
@@ -1055,27 +1093,27 @@ function exportAllPages() {
                 </div>
               </div>
               `
-              const panels = editor.Panels.getPanel('views-container')
-              console.log(editor.Panels.getPanels());
-              panels.set('appendContent', pagesMenu).trigger('change:appendContent')
-              pagesPanel = pagesMenu
+            const panels = editor.Panels.getPanel('views-container')
+            console.log(editor.Panels.getPanels());
+            panels.set('appendContent', pagesMenu).trigger('change:appendContent')
+            pagesPanel = pagesMenu
           }
           pagesPanel.style.display = 'block'
         },
         stop: function (editor) {
-            if(pagesPanel != null){
-              pagesPanel.style.display = 'none'
-            }
+          if (pagesPanel != null) {
+            pagesPanel.style.display = 'none'
+          }
         }
       });
       editor.Commands.run('toggle-pages');
 
       axpm.init();
 
-      pn.removeButton("devices-c","set-device-desktop");   
-      jQuery(".gjs-pn-devices-c .gjs-pn-buttons span").last().click(); 
-      
-        });
+      pn.removeButton("devices-c", "set-device-desktop");
+      jQuery(".gjs-pn-devices-c .gjs-pn-buttons span").last().click();
+
+    });
 
     (function (i, s, o, g, r, a, m) {
       i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
@@ -1086,6 +1124,8 @@ function exportAllPages() {
 
     ga('create', 'UA-74284223-1', 'auto');
     ga('send', 'pageview');
+
+
   </script>
 </body>
 
